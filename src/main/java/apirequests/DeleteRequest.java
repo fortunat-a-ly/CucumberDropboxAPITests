@@ -16,26 +16,20 @@ import java.util.Map;
 
 public class DeleteRequest extends Request {
 
-    private HttpEntityEnclosingRequestBase request = new HttpPost(URLManager.URL_DELETE);
-    private List<String> ids;
+    private final HttpEntityEnclosingRequestBase request = new HttpPost(URLManager.URL_DELETE);
 
     public DeleteRequest(List<String> idsToDelete) {
-        this.ids = idsToDelete;
+        request.setHeader("Content-Type", ContentType.APPLICATION_JSON.getMimeType());
+        Map<String, Object> rqBody = new HashMap<>();
+        rqBody.put("ids", idsToDelete);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String jsonBody = gson.toJson(rqBody);
+        request.setEntity(new StringEntity(jsonBody, ContentType.APPLICATION_JSON));
     }
 
     @Override
     public HttpEntityEnclosingRequestBase getRequest() {
-        request.setEntity(getRequestBody());
-        request.setHeader("Content-Type", ContentType.APPLICATION_JSON.getMimeType());
         return request;
     }
 
-    @Override
-    public AbstractHttpEntity getRequestBody() {
-        Map<String, Object> rqBody = new HashMap<>();
-        rqBody.put("ids", ids);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String jsonBody = gson.toJson(rqBody);
-        return new StringEntity(jsonBody, ContentType.APPLICATION_JSON);
-    }
 }

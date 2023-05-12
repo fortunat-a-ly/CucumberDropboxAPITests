@@ -21,17 +21,12 @@ public abstract class Request {
         try(CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpEntityEnclosingRequestBase request = getRequest();
             request.setHeader("Authorization", "Bearer " + URLManager.TOKEN);
-            AbstractHttpEntity body = getRequestBody();
-            if (body != null) {
-                request.setEntity(body);
-            }
-            System.out.println(getRequestBody());
+            System.out.println(request);
             HttpResponse response = httpClient.execute(request);
             System.out.println(response);
             HttpEntity responseEntity = response.getEntity();
             String responseBody = EntityUtils.toString(responseEntity);
             System.out.println(responseBody);
-            Gson gson = new Gson();
             JsonElement jsonElement = JsonParser.parseString(responseBody);
             if (jsonElement.isJsonObject())
                 return jsonElement.getAsJsonObject();
@@ -39,5 +34,4 @@ public abstract class Request {
         }
     }
     public abstract HttpEntityEnclosingRequestBase getRequest();
-    public abstract AbstractHttpEntity getRequestBody();
 }

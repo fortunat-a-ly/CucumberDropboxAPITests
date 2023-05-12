@@ -21,7 +21,7 @@ public class UploadStepDefinitions {
     }
     @When("I upload it under the path {string}")
     public void i_upload_it_under_the_path(String path) throws IOException {
-        response = new UploadRequest(path, binaryFile).send();
+        response = UploadRequest.getRequest(path, binaryFile).send();
         filePath = path;
     }
     @Then("I should get a file id in the response")

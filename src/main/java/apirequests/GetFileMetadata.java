@@ -16,28 +16,20 @@ import java.util.Map;
 public class GetFileMetadata extends Request {
 
     private final HttpEntityEnclosingRequestBase request = new HttpPost(URLManager.URL_FILE_METADATA);
-    private final List<String> actions;
-    private final String id;
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public GetFileMetadata(List<String> actions, String id) {
-        this.actions = actions;
-        this.id = id;
+        request.setHeader("Content-Type", ContentType.APPLICATION_JSON.getMimeType());
+        Map<String, Object> rqBody = Map.of(
+                "actions", actions,
+                "file","id:" + id
+        );
+        request.setEntity(new StringEntity(gson.toJson(rqBody), ContentType.APPLICATION_JSON));
     }
 
     @Override
     public HttpEntityEnclosingRequestBase getRequest() {
-        request.setHeader("Content-Type", ContentType.APPLICATION_JSON.getMimeType());
         return request;
-    }
-
-    @Override
-    public AbstractHttpEntity getRequestBody() {
-        Map<String, Object> rqBody = new HashMap<>();
-        rqBody.put("actions", actions);
-        rqBody.put("file","id:" + id);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String jsonBody = gson.toJson(rqBody);
-        return new StringEntity(jsonBody, ContentType.APPLICATION_JSON);
     }
 
 }
