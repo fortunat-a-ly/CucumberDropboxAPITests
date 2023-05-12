@@ -1,0 +1,251 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2023-05-12T15:58:35.316Z",
+        "line": 13,
+        "name": "Delete an existing file and non-existing file",
+        "description": "",
+        "id": "delete-a-file;delete-an-existing-file-and-non-existing-file;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 8994500,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I have a file with \"XecZVagxrBsAAAAAAAAACA\" that I want to delete",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"XecZVagxrBsAAAAAAAAACA\"",
+                  "offset": 19
+                }
+              ],
+              "location": "edu.dropboxapi.tests.stepdefs.DeleteStepDefinitions.iHaveAFileWith(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I have another file under wrong id \"aaaaaaaa\" that I want to delete",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"aaaaaaaa\"",
+                  "offset": 35
+                }
+              ],
+              "location": "edu.dropboxapi.tests.stepdefs.DeleteStepDefinitions.iHaveAnotherFileUnderWrongIdThatIWantToDelete(java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 935075300,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I delete them",
+            "match": {
+              "location": "edu.dropboxapi.tests.stepdefs.DeleteStepDefinitions.iSendDeleteRequest()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I should get the error \"not_found\" in the response",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"not_found\"",
+                  "offset": 23
+                }
+              ],
+              "location": "edu.dropboxapi.tests.stepdefs.DeleteStepDefinitions.iShouldGetItsErrorInTheResponse(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Delete a file",
+    "description": "  Delete a batch of closed file requests.",
+    "id": "delete-a-file",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/delete.feature",
+    "tags": []
+  },
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2023-05-12T15:58:36.530Z",
+        "line": 13,
+        "name": "Get name of the available file by its id",
+        "description": "",
+        "id": "get-file-metadata;get-name-of-the-available-file-by-its-id;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I have a file with \"XecZVagxrBsAAAAAAAAACg\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"XecZVagxrBsAAAAAAAAACg\"",
+                  "offset": 19
+                }
+              ],
+              "location": "edu.dropboxapi.tests.stepdefs.GetFileMetadataStepDefinitions.iHaveAFileWith(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 479731300,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I send GetFileMetadata request",
+            "match": {
+              "location": "edu.dropboxapi.tests.stepdefs.GetFileMetadataStepDefinitions.iSendGetFileMetadataRequest()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 996400,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I should get its name \"text-file.txt\" in the response",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"text-file.txt\"",
+                  "offset": 22
+                }
+              ],
+              "location": "edu.dropboxapi.tests.stepdefs.GetFileMetadataStepDefinitions.iShouldGetItsNameInTheResponse(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 993800,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I should get the same id that I searched for in the response",
+            "match": {
+              "location": "edu.dropboxapi.tests.stepdefs.GetFileMetadataStepDefinitions.iShouldGetTheSameIdThatISearchedForInTheResponse()"
+            },
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "Get File Metadata",
+    "description": "  The feature returns shared file metadata.",
+    "id": "get-file-metadata",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/getfilemetadata.feature",
+    "tags": []
+  },
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2023-05-12T15:58:37.037Z",
+        "line": 13,
+        "name": "Upload a file",
+        "description": "",
+        "id": "dropbox-upload;upload-a-file;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 999800,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I have a file smaller than 150 MB",
+            "match": {
+              "arguments": [
+                {
+                  "val": "150",
+                  "offset": 27
+                }
+              ],
+              "location": "edu.dropboxapi.tests.stepdefs.UploadStepDefinitions.i_have_a_file_smaller_than_mb(int)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 534896600,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I upload it under the path \"/cucumber/text-file6666.txt\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"/cucumber/text-file6666.txt\"",
+                  "offset": 27
+                }
+              ],
+              "location": "edu.dropboxapi.tests.stepdefs.UploadStepDefinitions.i_upload_it_under_the_path(java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 999100,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I should get a file id in the response",
+            "match": {
+              "location": "edu.dropboxapi.tests.stepdefs.UploadStepDefinitions.i_should_get_a_file_id_in_the_response()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 999200,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I should get a file part of the path as the name in the response",
+            "match": {
+              "location": "edu.dropboxapi.tests.stepdefs.UploadStepDefinitions.i_should_get_a_file_part_of_the_path_as_the_name_in_the_response()"
+            },
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "Dropbox Upload",
+    "description": "  Create a new file with the contents provided in the request.",
+    "id": "dropbox-upload",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/upload.feature",
+    "tags": []
+  }
+]
