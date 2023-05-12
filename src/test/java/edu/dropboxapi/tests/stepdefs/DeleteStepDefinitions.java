@@ -18,14 +18,23 @@ public class DeleteStepDefinitions {
     private String id;
     private String wrongId;
     @Given("I have a file with {string} that I want to delete")
-    public void iHaveAFileWith(String id) {
+    public void iHaveAFileWith(String id) throws IOException {
         assert id != null && !id.isBlank();
+        JsonObject rs = new GetFileMetadata(List.of(), id).send();
+        assert rs.get("error") == null;
+        JsonElement responseId = rs.get("id");
+        assert responseId != null && responseId.getAsString().equals("id:" + id);
         this.id = id;
     }
 
     @And("I have another file under wrong id {string} that I want to delete")
-    public void iHaveAnotherFileUnderWrongIdThatIWantToDelete(String wrongId) {
-        assert wrongId != null && !wrongId.isBlank();
+    public void iHaveAnotherFileUnderWrongIdThatIWantToDelete(String wrongId) throws IOException {
+        assert id != null;
+        JsonObject rs = new GetFileMetadata(List.of(), wrongId).send();
+        JsonElement error = rs.get("error");
+        assert  error != null
+                && ("not_found".equals(error.getAsJsonObject().get(".tag").getAsString())
+                    || "access_error".equals(error.getAsJsonObject().get(".tag").getAsString()));
         this.wrongId = wrongId;
     }
 
