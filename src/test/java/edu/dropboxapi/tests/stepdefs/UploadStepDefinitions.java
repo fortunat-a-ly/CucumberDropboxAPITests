@@ -20,8 +20,10 @@ public class UploadStepDefinitions {
         assert binaryFile != null && binaryFile.length / (1024.0 * 1024.0) < size;
     }
     @When("I upload it under the path {string}")
-    public void i_upload_it_under_the_path(String path) throws IOException {
-        response = UploadRequest.getRequest(path, binaryFile).send();
+    public void i_upload_it_under_the_path(String path) throws Exception {
+        try(UploadRequest rq = (UploadRequest) UploadRequest.getRequest(path, binaryFile)) {
+            response = rq.send();
+        }
         filePath = path;
     }
     @Then("I should get a file id in the response")
